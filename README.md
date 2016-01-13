@@ -1,0 +1,2 @@
+# planar
+Planar curve operations
