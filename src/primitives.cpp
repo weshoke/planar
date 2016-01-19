@@ -93,6 +93,28 @@ namespace planar {
 		}
 		return std::vector<vsr::cga2D::Vec>{pt};
 	}
+	
+	std::vector<Point2D> Intersect(const Circle &circle1, const Circle &circle2) {
+		auto C1 = ToDualCircle(circle1);
+		auto C2 = ToDualCircle(circle2);
+		auto intersection = (C1 ^ C2).dual();
+		auto size = vsr::nga::Round::size(intersection, false);
+		
+		// Point pair size is negative, no intersection points
+		if(size < -1e-6f) {
+			return std::vector<vsr::cga2D::Vec>{};
+		}
+		
+		// Get the intersection points
+		auto split_pts = vsr::nga::Round::split(intersection);
+		auto pt1 = vsr::cga2D::Vec(split_pts[0][0], split_pts[0][1]);
+		auto pts = std::vector<vsr::cga2D::Vec>{pt1};
+		if(size > 1e-6) {
+			auto pt2 = vsr::cga2D::Vec(split_pts[1][0], split_pts[1][1]);
+			pts.push_back(pt2);
+		}
+		return pts;
+	}
 
 	std::vector<vsr::cga2D::Vec> Intersect(const Circle &circle, const LineSegment &segment) {
 		auto C = ToDualCircle(circle);

@@ -26,8 +26,8 @@ const lest::test specification[] = {
 	CASE("Test LineSegment-LineSegment Intersections") {
 		using LineSegment = planar::LineSegment;
 		using P2D = planar::Point2D;
-	
-		
+
+
 		TestIntersection(
 			lest_env,
 			LineSegment{P2D(0., 0.), P2D(1., 0.)},
@@ -75,7 +75,7 @@ const lest::test specification[] = {
 		using LineSegment = planar::LineSegment;
 		using Circle = planar::Circle;
 		using P2D = planar::Point2D;
-		
+
 		TestIntersection(
 			lest_env,
 			LineSegment{P2D(0., 0.), P2D(1., 0.)},
@@ -112,7 +112,7 @@ const lest::test specification[] = {
 		using Arc = planar::Arc;
 		using Circle = planar::Circle;
 		using P2D = planar::Point2D;
-		
+
 		auto norm = [](const P2D &p) { return p / p.norm(); };
 		// Q1
 		TestIntersection(
@@ -121,7 +121,7 @@ const lest::test specification[] = {
 			Arc{Circle{P2D(0., 0.), 1.}, LineSegment{P2D(1., 0.), norm(P2D(1., 1.))}},
 			{P2D(1., 0.)}
 		);
-		
+
 		{
 		auto test_pts = std::vector<P2D>{
 			P2D(1., 0.1),
@@ -154,8 +154,8 @@ const lest::test specification[] = {
 			++test_quadrant;
 		}
 		}
-		
-		
+
+
 		{
 		auto test_pts = std::vector<P2D>{
 			P2D(1., -0.1),
@@ -188,10 +188,10 @@ const lest::test specification[] = {
 			++test_quadrant;
 		}
 		}
-		
+
 		/*
 		if(true) return;
-		
+
 		TestIntersection(
 			lest_env,
 			LineSegment{P2D(0., 0.), P2D(1., 0.1)},
@@ -216,7 +216,7 @@ const lest::test specification[] = {
 			Arc{Circle{P2D(0., 0.), 1.}, LineSegment{P2D(1., 0.), norm(P2D(1., 1.))}},
 			{}
 		);
-		
+
 		// Q2
 		TestIntersection(
 			lest_env,
@@ -242,7 +242,7 @@ const lest::test specification[] = {
 			Arc{Circle{P2D(0., 0.), 1.}, LineSegment{P2D(1., 0.), norm(P2D(-1., 1.))}},
 			{}
 		);
-		
+
 		// Q3
 		TestIntersection(
 			lest_env,
@@ -268,7 +268,7 @@ const lest::test specification[] = {
 			Arc{Circle{P2D(0., 0.), 1.}, LineSegment{P2D(1., 0.), norm(P2D(-1., -1.))}},
 			{}
 		);
-		
+
 		// Q4
 		TestIntersection(
 			lest_env,
@@ -295,7 +295,32 @@ const lest::test specification[] = {
 			{norm(P2D(0.1, -1.))}
 		);
 		*/
-	}
+	},
+    CASE("Test Circle-Circle Intersections") {
+		using Circle = planar::Circle;
+		using P2D = planar::Point2D;
+
+        auto norm = [](const P2D &p) { return p / p.norm(); };
+
+        TestIntersection(
+			lest_env,
+            Circle{P2D(0., 0.), 1.},
+            Circle{P2D(1.5, 0.), 1.},
+            {P2D(0.75, -std::sqrt(1. - 0.75*0.75)), P2D(0.75, std::sqrt(1. - 0.75*0.75))}
+        );
+        TestIntersection(
+            lest_env,
+            Circle{P2D(0., 0.), 1.},
+            Circle{P2D(2., 0.), 1.},
+            {P2D(1., 0.)}
+        );
+        TestIntersection(
+            lest_env,
+            Circle{P2D(0., 0.), 1.},
+            Circle{P2D(2.5, 0.), 1.},
+            {}
+        );
+    }
 };
 // clang-format on
 

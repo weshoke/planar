@@ -30,6 +30,7 @@ namespace planar {
 
 
 	std::vector<Point2D> Intersect(const LineSegment &segment1, const LineSegment &segment2);
+	std::vector<Point2D> Intersect(const Circle &circle1, const Circle &circle2);
 	std::vector<Point2D> Intersect(const Circle &circle, const LineSegment &segment);
 	std::vector<Point2D> Intersect(const LineSegment &segment, const Circle &circle);
 	std::vector<Point2D> Intersect(const LineSegment &segment, const Arc &arc);
