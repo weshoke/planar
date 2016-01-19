@@ -1,0 +1,3 @@
+[submodule "third-party/lest"]
+	path = third-party/lest
+	url = https://github.com/martinmoene/lest.git
