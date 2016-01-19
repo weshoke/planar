@@ -150,6 +150,8 @@ namespace planar {
 			auto dir = pt - arc.circle.center;
 			auto op0 = (dir0 ^ dir)[0];
 			auto op1 = (dir ^ dir1)[0];
+			std::cout << dir0 << " ^ " << dir << "\n";
+			std::cout << dir << " ^ " << dir1 << "\n";
 			auto op0_sign = std::signbit(op0);
 			auto op1_sign = std::signbit(op1);
 			auto test_pos = !(op_sign || op0_sign || op1_sign);
