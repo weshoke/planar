@@ -74,5 +74,6 @@ const lest::test specification[] = {
 
 int main(int argc, char *argv[])
 {
-    return lest::run(specification, argc, argv);
+	lest::run(specification, argc, argv);
+	return 1;
 }

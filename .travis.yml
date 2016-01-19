@@ -81,7 +81,7 @@ script:
   - cmake --build .
   - |
     if [[ "${VALGRIND}" == "true" ]]; then
-       VALGRIND_CMD="valgrind --leak-check=full --error-exitcode=1"
+       VALGRIND_CMD="valgrind --leak-check=full --show-reachable=yes --error-exitcode=1"
        true \
            && ${VALGRIND_CMD} ./planar-test-all
     else
