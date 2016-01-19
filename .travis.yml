@@ -41,9 +41,9 @@ install:
   - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
 
   # Install a recent CMake
-  - CMAKE_URL="http://www.cmake.org/files/v3.4/cmake-3.4.1-Linux-x86_64.tar.gz"
+  - CMAKE_URL="https://cmake.org/files/v3.4/cmake-3.4.1-Linux-x86_64.tar.gz"
   # - mkdir cmake && travis_retry wget --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
-  - mkdir cmake && travis_retry wget -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
+  - mkdir cmake && travis_retry wget --no-check-certificate -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
   - export PATH=${DEPS_DIR}/cmake/bin:${PATH}
 
   # Install libc++ and libc++abi
