@@ -1,11 +1,12 @@
 #include "primitives.hpp"
+#include "vsr/space/vsr_cga2D_op.h"
 #include <cmath>
 #include <limits>
 
 namespace planar {
 
 	vsr::cga2D::Line ToLine(const LineSegment &segment) {
-		return vsr::cga2D::point(segment.pts[0]) ^ vsr::cga2D::point(segment.pts[1]) ^ vsr::cga2D::Infinity(1.f);
+		return vsr::cga2D::Construct::point(segment.pts[0]) ^ vsr::cga2D::Construct::point(segment.pts[1]) ^ vsr::cga2D::Infinity(1.f);
 	}
 
 	vsr::cga2D::Dls ToDualCircle(const Circle &circle) {
@@ -77,7 +78,6 @@ namespace planar {
 		auto L2 = ToLine(segment2);
 		// Intersection as a flat point (Flp)
 		auto intersection = (L1.dual() ^ L2.dual()).dual();
-		decltype((L1.dual() ^ L2.dual()).dual())::basis::print();
 		
 		// Check if the only intersection is the point at infinity
 		if(std::abs(intersection[2]) <= 1e-6) {
@@ -89,9 +89,9 @@ namespace planar {
 		auto within1 = LineSegmentContainsPoint(segment1, pt);
 		auto within2 = LineSegmentContainsPoint(segment2, pt);
 		if(!within1 || !within2) {
-			return std::vector<vsr::cga2D::Vec>{};
+			return std::vector<vsr::cga2D::Vec>{pt};
 		}
-		return std::vector<vsr::cga2D::Vec>{vsr::cga2D::Vec(pt)};
+		return std::vector<vsr::cga2D::Vec>{pt};
 	}
 
 	std::vector<vsr::cga2D::Vec> Intersect(const Circle &circle, const LineSegment &segment) {

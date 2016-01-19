@@ -31,7 +31,7 @@ const lest::test specification[] = {
 			LineSegment{P2D(0., 0.), P2D(0., 1.)},
 			{P2D(0., 0.)}
 		);
-		/*TestLineSegmentLineSegmentIntersection(
+		TestLineSegmentLineSegmentIntersection(
 			lest_env,
 			LineSegment{P2D(0., 0.), P2D(1., 0.)},
 			LineSegment{P2D(1., 0.), P2D(1., 1.)},
@@ -67,7 +67,6 @@ const lest::test specification[] = {
 			LineSegment{P2D(0., 1.), P2D(1., 1.)},
 			{}
 		);
-		*/
 	}
 };
 // clang-format on
