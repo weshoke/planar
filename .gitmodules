@@ -1,3 +1,9 @@
 [submodule "third-party/lest"]
 	path = third-party/lest
 	url = https://github.com/martinmoene/lest.git
+[submodule "third-party/versor"]
+	path = third-party/versor
+	url = https://github.com/wolftype/versor.git
+[submodule "third-party/variant"]
+	path = third-party/variant
+	url = https://github.com/eggs-cpp/variant
