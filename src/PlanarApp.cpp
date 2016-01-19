@@ -128,59 +128,6 @@ gl::BatchRef ToBatch(const planar::Arc &arc, glm::vec4 color = glm::vec4(0.f, 0.
 	return gl::Batch::create(mesh, shader);
 }
 
-void TestLineSegmentIntersection(const planar::LineSegment &LS1, const planar::LineSegment &LS2, const std::vector<planar::Point2D> &expected_pts) {
-	auto pts = planar::Intersect(LS1, LS2);
-	// EXPECT pts.size() == expected_pts.size();
-	// for(size_t i=0; i < pts.size(); ++i) {
-	//	EXPECT pts[i] == expected_pts[i];
-	//}
-}
-
-
-void Tests() {
-	using LineSegment = planar::LineSegment;
-	using P2D = planar::Point2D;
-
-	// Basic intersection tests
-	{
-		TestLineSegmentIntersection(
-			LineSegment{P2D(0., 0.), P2D(1., 0.)},
-			LineSegment{P2D(0., 0.), P2D(0., 1.)},
-			{P2D(0., 0.)}
-		);
-		TestLineSegmentIntersection(
-			LineSegment{P2D(0., 0.), P2D(1., 0.)},
-			LineSegment{P2D(1., 0.), P2D(1., 1.)},
-			{P2D(1., 0.)}
-		);
-		TestLineSegmentIntersection(
-			LineSegment{P2D(0., 0.), P2D(1., 0.)},
-			LineSegment{P2D(0.5, 0.), P2D(0.5, 1.)},
-			{P2D(0.5, 0.)}
-		);
-		TestLineSegmentIntersection(
-			LineSegment{P2D(0., 0.), P2D(1., 0.)},
-			LineSegment{P2D(0.5, -1.), P2D(0.5, 1.)},
-			{P2D(0.5, 0.)}
-		);
-		TestLineSegmentIntersection(
-			LineSegment{P2D(0., 0.), P2D(1., 0.)},
-			LineSegment{P2D(1.5, -1.), P2D(1.5, 1.)},
-			{}
-		);
-		TestLineSegmentIntersection(
-			LineSegment{P2D(0., 0.), P2D(1., 0.)},
-			LineSegment{P2D(-.5, -1.), P2D(-.5, 1.)},
-			{}
-		);
-		TestLineSegmentIntersection(
-			LineSegment{P2D(0., 0.), P2D(1., 0.)},
-			LineSegment{P2D(0., 1.), P2D(1., 1.)},
-			{}
-		);
-	}
-}
-
 void PlanarApp::setup()
 {
 	// 1: scalar
@@ -361,8 +308,6 @@ void PlanarApp::setup()
 	batches.push_back(ToBatch(arc1));
 	
 	//auto pts = Intersect(LS1, arc1);
-	
-	Tests();
 	
 	/*
 	auto v1 = vsr::cga2D::Vec(1., 0.);
