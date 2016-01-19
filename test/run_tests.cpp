@@ -367,7 +367,38 @@ const lest::test specification[] = {
         );
     },
     CASE("Test Arc-Arc Intersections") {
+        using P2D = planar::Point2D;
 
+        TestIntersection(
+			lest_env,
+            planar::ArcWithDirectionAndAngle(P2D(0., 0.), 1., P2D(1., 0.), M_PI_2),
+            planar::ArcWithDirectionAndAngle(P2D(1.5, 0.), 1., P2D(1., 0.), M_PI_2),
+            {}
+        );
+        TestIntersection(
+			lest_env,
+            planar::ArcWithDirectionAndAngle(P2D(0., 0.), 1., P2D(1., 0.), M_PI_2),
+            planar::ArcWithDirectionAndAngle(P2D(1.5, 0.), 1., P2D(0., 1.), M_PI_2),
+            {}
+        );
+        TestIntersection(
+			lest_env,
+            planar::ArcWithDirectionAndAngle(P2D(0., 0.), 1., P2D(1., 0.), M_PI_2),
+            planar::ArcWithDirectionAndAngle(P2D(1.5, 0.), 1., P2D(-1., 0.), M_PI_2),
+            {P2D(0.75, -std::sqrt(1. - 0.75*0.75)), P2D(0.75, std::sqrt(1. - 0.75*0.75))}
+        );
+        TestIntersection(
+			lest_env,
+            planar::ArcWithDirectionAndAngle(P2D(0., 0.), 1., P2D(1., -1.), M_PI_2),
+            planar::ArcWithDirectionAndAngle(P2D(1.5, 0.), 1., P2D(-1., 0.), M_PI_2),
+            {P2D(0.75, -std::sqrt(1. - 0.75*0.75))}
+        );
+        TestIntersection(
+			lest_env,
+            planar::ArcWithDirectionAndAngle(P2D(0., 0.), 1., P2D(1., 0.), M_PI_2),
+            planar::ArcWithDirectionAndAngle(P2D(1.5, 0.), 1., P2D(0., 1.), M_PI),
+            {P2D(0.75, std::sqrt(1. - 0.75*0.75))}
+        );
     }
 };
 // clang-format on
