@@ -150,8 +150,8 @@ namespace planar {
 			auto dir = pt - arc.circle.center;
 			auto op0 = (dir0 ^ dir)[0];
 			auto op1 = (dir ^ dir1)[0];
-			std::cout << dir0 << " ^ " << dir << "\n";
-			std::cout << dir << " ^ " << dir1 << "\n";
+			//std::cout << dir0 << " ^ " << dir << "\n";
+			//std::cout << dir << " ^ " << dir1 << "\n";
 			auto op0_sign = std::signbit(op0);
 			auto op1_sign = std::signbit(op1);
 			auto test_pos = !(op_sign || op0_sign || op1_sign);
@@ -160,18 +160,18 @@ namespace planar {
 			auto test_pos_neg = !r_sign && op_sign && !(op0_sign && op1_sign);
 			auto test_neg_pos = r_sign && !op_sign && (op0_sign || op1_sign);
 			auto test_neg_neg = r_sign && test_neg;
-			std::cout << r_sign << " " << op_sign << " " << op0_sign << " " << op1_sign << "\n";
-			std::cout << "\t" << test_pos << " " << test_neg << "\n";
-			std::cout << "\t" << test_pos_pos << " " << test_pos_neg << "\n";
+			//std::cout << r_sign << " " << op_sign << " " << op0_sign << " " << op1_sign << "\n";
+			//std::cout << "\t" << test_pos << " " << test_neg << "\n";
+			//std::cout << "\t" << test_pos_pos << " " << test_pos_neg << "\n";
 			if(test_pos_pos || test_pos_neg || test_neg_pos || test_neg_neg) {
 			//if(test_pos_pos ||test_neg_neg || ) {
 				pts.push_back(pt);
-				std::cout << "ADD: " << pt << "\n";
+				//std::cout << "ADD: " << pt << "\n";
 			}
 			else {
-				std::cout << "REM: " << pt << "\n";
+				//std::cout << "REM: " << pt << "\n";
 			}
-			std::cout << "\n";
+			//std::cout << "\n";
 		}
 		return pts;
 	}

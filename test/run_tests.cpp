@@ -121,6 +121,77 @@ const lest::test specification[] = {
 			Arc{Circle{P2D(0., 0.), 1.}, LineSegment{P2D(1., 0.), norm(P2D(1., 1.))}},
 			{P2D(1., 0.)}
 		);
+		
+		{
+		auto test_pts = std::vector<P2D>{
+			P2D(1., 0.1),
+			P2D(-0.1, 1.),
+			P2D(-1., -0.1),
+			P2D(0.1, -1.)
+		};
+		auto test_end_pts = std::vector<P2D>{
+			norm(P2D(1., 1.)),
+			norm(P2D(-1., 1.)),
+			norm(P2D(-1., -1.)),
+			norm(P2D(1., -1.)),
+		};
+		auto test_quadrant = 0;
+		for(const auto& end_pt : test_end_pts) {
+			auto pt_quadrant = 0;
+			for(const auto& pt : test_pts) {
+				auto expected_pts = std::vector<P2D>{};
+				if(pt_quadrant <= test_quadrant) {
+					expected_pts.push_back(norm(pt));
+				}
+				TestIntersection(
+					lest_env,
+					LineSegment{P2D(0., 0.), pt},
+					Arc{Circle{P2D(0., 0.), 1.}, LineSegment{P2D(1., 0.), end_pt}},
+					expected_pts
+				);
+				++pt_quadrant;
+			}
+			++test_quadrant;
+		}
+		}
+		
+		
+		{
+		auto test_pts = std::vector<P2D>{
+			P2D(1., -0.1),
+			P2D(-0.1, -1.),
+			P2D(-1., 0.1),
+			P2D(0.1, 1.)
+		};
+		auto test_end_pts = std::vector<P2D>{
+			norm(P2D(1., -1.)),
+			norm(P2D(-1., -1.)),
+			norm(P2D(-1., 1.)),
+			norm(P2D(1., 1.)),
+		};
+		auto test_quadrant = 0;
+		for(const auto& end_pt : test_end_pts) {
+			auto pt_quadrant = 0;
+			for(const auto& pt : test_pts) {
+				auto expected_pts = std::vector<P2D>{};
+				if(pt_quadrant <= test_quadrant) {
+					expected_pts.push_back(norm(pt));
+				}
+				TestIntersection(
+					lest_env,
+					LineSegment{P2D(0., 0.), pt},
+					Arc{Circle{P2D(0., 0.), -1.}, LineSegment{P2D(1., 0.), end_pt}},
+					expected_pts
+				);
+				++pt_quadrant;
+			}
+			++test_quadrant;
+		}
+		}
+		
+		/*
+		if(true) return;
+		
 		TestIntersection(
 			lest_env,
 			LineSegment{P2D(0., 0.), P2D(1., 0.1)},
@@ -223,6 +294,7 @@ const lest::test specification[] = {
 			Arc{Circle{P2D(0., 0.), 1.}, LineSegment{P2D(1., 0.), norm(P2D(1., -1.))}},
 			{norm(P2D(0.1, -1.))}
 		);
+		*/
 	}
 };
 // clang-format on
