@@ -11,6 +11,7 @@ void TestLineSegmentLineSegmentIntersection(
 	const std::vector<planar::Point2D> &expected_pts
 ) {
 	auto pts = planar::Intersect(LS1, LS2);
+	std::cout << "SIZES: " << pts.size() << " " << expected_pts.size() << "\n";
 	EXPECT(pts.size() == expected_pts.size());
 	for(size_t i=0; i < pts.size(); ++i) {
 		EXPECT(pts[i][0] == lest::approx(expected_pts[i][0]));
