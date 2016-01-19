@@ -81,7 +81,7 @@ namespace planar {
 		
 		// Check if the only intersection is the point at infinity
 		if(std::abs(intersection[2]) <= 1e-6) {
-			return std::vector<vsr::cga2D::Vec>{vsr::cga2D::Vec(0.f, 0.f)};
+			return std::vector<vsr::cga2D::Vec>{};
 		}
 		
 		// Check if the intersection point is withint the line segments
@@ -89,7 +89,7 @@ namespace planar {
 		auto within1 = LineSegmentContainsPoint(segment1, pt);
 		auto within2 = LineSegmentContainsPoint(segment2, pt);
 		if(!within1 || !within2) {
-			return std::vector<vsr::cga2D::Vec>{pt};
+			return std::vector<vsr::cga2D::Vec>{};
 		}
 		return std::vector<vsr::cga2D::Vec>{pt};
 	}
