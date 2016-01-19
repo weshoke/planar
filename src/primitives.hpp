@@ -23,6 +23,8 @@ namespace planar {
 	};
 
 	typedef eggs::variant<LineSegment, Circle, Arc> Curve;
+	
+	Arc ArcWithDirectionAndAngle(const Point2D &center, float radius, const vsr::cga2D::Vec &direction, float angle);
 
 	LineSegment Offset(const LineSegment &segment, float amt);
 	Circle Offset(const Circle &circle, float amt);
@@ -31,10 +33,13 @@ namespace planar {
 
 	std::vector<Point2D> Intersect(const LineSegment &segment1, const LineSegment &segment2);
 	std::vector<Point2D> Intersect(const Circle &circle1, const Circle &circle2);
+	std::vector<Point2D> Intersect(const Arc &arc1, const Arc &arc2);
 	std::vector<Point2D> Intersect(const Circle &circle, const LineSegment &segment);
 	std::vector<Point2D> Intersect(const LineSegment &segment, const Circle &circle);
 	std::vector<Point2D> Intersect(const LineSegment &segment, const Arc &arc);
 	std::vector<Point2D> Intersect(const Arc &arc, const LineSegment &segment);
+	std::vector<Point2D> Intersect(const Circle &circle, const Arc &arc);
+	std::vector<Point2D> Intersect(const Arc &arc, const Circle &circle);
 
 }
 
