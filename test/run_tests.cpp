@@ -115,7 +115,6 @@ const lest::test specification[] = {
 		
 		auto norm = [](const P2D &p) { return p / p.norm(); };
 		// Q1
-		/*
 		TestIntersection(
 			lest_env,
 			LineSegment{P2D(0., 0.), P2D(1., 0.)},
@@ -172,7 +171,6 @@ const lest::test specification[] = {
 			Arc{Circle{P2D(0., 0.), 1.}, LineSegment{P2D(1., 0.), norm(P2D(-1., 1.))}},
 			{}
 		);
-		*/
 		
 		// Q3
 		TestIntersection(
