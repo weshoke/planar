@@ -7,3 +7,6 @@
 [submodule "third-party/variant"]
 	path = third-party/variant
 	url = https://github.com/eggs-cpp/variant
+[submodule "third-party/range-v3"]
+	path = third-party/range-v3
+	url = https://github.com/ericniebler/range-v3.git

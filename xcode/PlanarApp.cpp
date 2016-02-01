@@ -307,6 +307,8 @@ void PlanarApp::setup()
 	//batches.push_back(ToBatch(C2));
 	batches.push_back(ToBatch(arc1));
 	
+	//auto loop = planar::Loop();
+	
 	//auto pts = Intersect(LS1, arc1);
 	
 	/*
