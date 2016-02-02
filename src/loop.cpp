@@ -37,17 +37,66 @@ auto v1 = std::vector<int>{10, 3, 1, 2, 3, 4, 5};
 	}
 */
 
+
+template <typename T>
+void draw(const T& x, ostream& out, size_t position) {
+	out << string(position, ' ') << x << "\n";
+}
+
+
 Loop Loop::Offset(float amt) {
-	auto offset_curves = std::vector<Curve>{};
-	offset_curves.resize(curves_.size());
+	auto tangents = std::vector< std::vector<Vec2d> >{};
+	tangents.reserve(curves_.size());
+	
 	for(const auto& curve : curves_) {
-		auto idx = curve.which();
-		switch(idx) {
-			case 0: offset_curves.push_back(::planar::Offset(*curve.template target<LineSegment>(), amt)); break;
-			case 1: offset_curves.push_back(::planar::Offset(*curve.template target<Circle>(), amt)); break;
-			case 2: offset_curves.push_back(::planar::Offset(*curve.template target<Arc>(), amt)); break;
+		tangents.push_back(planar::Tangents(curve));
+	}
+	
+	auto sin_theta = std::vector<float>{};
+	sin_theta.reserve(tangents.size());
+	for(int i=0; i < tangents.size()-1; ++i) {
+		const auto &t1 = tangents[i][1];
+		const auto &t2 = tangents[i + 1][0];
+		sin_theta.push_back((t2 ^ t1)[0]);
+	}
+	{
+		const auto &t1 = tangents.back()[1];
+		const auto &t2 = tangents.front()[0];
+		sin_theta.push_back((t2 ^ t1)[0]);
+	}
+	
+
+	auto offset_curves = std::vector<Curve>{};
+	offset_curves.reserve(curves_.size());
+
+	
+	for(const auto& curve : curves_) {
+		offset_curves.push_back(planar::Offset(curve, amt));
+	}
+
+	for(int i=curves_.size()-2; i >= 0; --i) {
+		const auto &curve = curves_[i];
+		const auto &offset_curve1 = offset_curves[i + 1];
+		const auto &offset_curve0 = offset_curves[i];
+		
+		if(sin_theta[i] < 0.f) {
+			// needs current offset's endpoint and next offsets startpoint
+			auto c = Arc{Circle{Endpoints(curve)[1], amt}, {Endpoints(offset_curve0)[1], Endpoints(offset_curve1)[0]}};
+			offset_curves.insert(offset_curves.begin() + i + 1, c);
 		}
 	}
+	{
+		const auto &curve = curves_.back();
+		const auto &offset_curve1 = offset_curves.front();
+		const auto &offset_curve0 = offset_curves.back();
+		
+		if(sin_theta.back() < 0.f) {
+			// needs current offset's endpoint and next offsets startpoint
+			auto c = Arc{Circle{Endpoints(curve)[1], amt}, {Endpoints(offset_curve0)[1], Endpoints(offset_curve1)[0]}};
+			offset_curves.insert(offset_curves.end() - 1, c);
+		}
+	}
+	
 	return Loop(offset_curves);
 }
 

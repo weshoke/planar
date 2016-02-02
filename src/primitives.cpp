@@ -4,6 +4,10 @@
 #include <limits>
 
 namespace planar {
+//	Curve Offset(const Curve& x, float offset)
+//	{
+//		return x.self_->Offset_(offset);
+//	}
 
 	vsr::cga2D::Line ToLine(const LineSegment &segment) {
 		return vsr::cga2D::Construct::point(segment.pts[0]) ^ vsr::cga2D::Construct::point(segment.pts[1]) ^ vsr::cga2D::Infinity(1.f);
@@ -41,7 +45,7 @@ namespace planar {
 	
 	bool ArcContainsPoint(
 		const Arc &arc,
-		const Point2D &pt,
+		const Point2d &pt,
 		const vsr::cga2D::Vec &dir0,
 		const vsr::cga2D::Vec &dir1,
 		bool op_sign,
@@ -68,13 +72,13 @@ namespace planar {
 		return test_pos_pos || test_pos_neg || test_neg_pos || test_neg_neg;
 	}
 	
-	Arc ArcWithDirectionAndAngle(const Point2D &center, float radius, const vsr::cga2D::Vec &direction, float angle) {
+	Arc ArcWithDirectionAndAngle(const Point2d &center, float radius, const vsr::cga2D::Vec &direction, float angle) {
 		auto theta = std::atan2(direction[1], direction[0]);
 		auto theta1 = theta - angle * 0.5f;
 		auto theta2 = theta1 + angle;
 		auto r = std::abs(radius);
-		auto pt1 = center + Point2D(std::cos(theta1), std::sin(theta1)) * r;
-		auto pt2 = center + Point2D(std::cos(theta2), std::sin(theta2)) * r;
+		auto pt1 = center + Point2d(std::cos(theta1), std::sin(theta1)) * r;
+		auto pt2 = center + Point2d(std::cos(theta2), std::sin(theta2)) * r;
 		auto circle = Circle{center, radius};
 		auto endpoints = std::signbit(radius) ? LineSegment{pt2, pt1} : LineSegment{pt1, pt2};
 		return Arc{circle, endpoints};
@@ -85,8 +89,9 @@ namespace planar {
 		// in the direction of CCW(Dir(segment)) and amt < 0 is
 		// is a translation in the direction of CW(Dir(segment))
 		auto dir = LineSegmentDirection(segment);
-		auto offset_dir = amt >= 0.f ? RotateCCW(dir) : RotateCW(dir);
-		return LineSegment{segment.pts[0] + offset_dir, segment.pts[1] + offset_dir};
+		//auto offset_dir = (amt >= 0.f ? RotateCCW(dir) : RotateCW(dir)) * amt;
+		auto offset = RotateCW(dir) * amt;
+		return LineSegment{segment.pts[0] + offset, segment.pts[1] + offset};
 	}
 
 	Circle Offset(const Circle &circle, float amt) {
@@ -112,6 +117,34 @@ namespace planar {
 		return Arc{circle, endpoints};
 	}
 
+	std::vector<Vec2d> Tangents(const LineSegment &segment) {
+		auto t = Normalize(segment.pts[1] - segment.pts[0]);
+		return {t, t};
+	}
+	
+	std::vector<Vec2d> Tangents(const Circle &circle) {
+		return {};
+	}
+	
+	std::vector<Vec2d> Tangents(const Arc &arc) {
+		auto radius_inv = (1.f/arc.circle.radius);
+		auto d0 = (arc.endpoints.pts[0] - arc.circle.center) * radius_inv;
+		auto d1 = (arc.endpoints.pts[1] - arc.circle.center) * radius_inv;
+		return {Vec2d(-d0[1], d0[0]), Vec2d(-d1[1], d1[0])};
+	}
+	
+	std::vector<Vec2d> Endpoints(const LineSegment &segment) {
+		return {segment.pts[0], segment.pts[1]};
+	}
+	
+	std::vector<Vec2d> Endpoints(const Circle &circle) {
+		return {};
+	}
+	
+	std::vector<Vec2d> Endpoints(const Arc &arc) {
+		return {arc.endpoints.pts[0], arc.endpoints.pts[1]};
+	}
+
 
 	std::vector<vsr::cga2D::Vec> Intersect(const LineSegment &segment1, const LineSegment &segment2) {
 		auto L1 = ToLine(segment1);
@@ -134,7 +167,7 @@ namespace planar {
 		return std::vector<vsr::cga2D::Vec>{pt};
 	}
 	
-	std::vector<Point2D> Intersect(const Circle &circle1, const Circle &circle2) {
+	std::vector<Point2d> Intersect(const Circle &circle1, const Circle &circle2) {
 		auto C1 = ToDualCircle(circle1);
 		auto C2 = ToDualCircle(circle2);
 		auto intersection = (C1 ^ C2).dual();
@@ -156,7 +189,7 @@ namespace planar {
 		return pts;
 	}
 	
-	std::vector<Point2D> Intersect(const Arc &arc1, const Arc &arc2) {
+	std::vector<Point2d> Intersect(const Arc &arc1, const Arc &arc2) {
 		auto arc1_dir0 = arc1.endpoints.pts[0] - arc1.circle.center;
 		auto arc1_dir1 = arc1.endpoints.pts[1] - arc1.circle.center;
 		auto arc1_op = (arc1_dir0 ^ arc1_dir1)[0];
@@ -238,7 +271,7 @@ namespace planar {
 		return Intersect(segment, arc);
 	}
 	
-	std::vector<Point2D> Intersect(const Circle &circle, const Arc &arc) {
+	std::vector<Point2d> Intersect(const Circle &circle, const Arc &arc) {
 		auto dir0 = arc.endpoints.pts[0] - arc.circle.center;
 		auto dir1 = arc.endpoints.pts[1] - arc.circle.center;
 		auto op = (dir0 ^ dir1)[0];
@@ -255,7 +288,7 @@ namespace planar {
 		return pts;
 	}
 	
-	std::vector<Point2D> Intersect(const Arc &arc, const Circle &circle) {
+	std::vector<Point2d> Intersect(const Arc &arc, const Circle &circle) {
 		return Intersect(circle, arc);
 	}
 }
