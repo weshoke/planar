@@ -1,0 +1,58 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "FEFD3A155CF1B231AC02373441C76654645FC6D1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9B076C6A47502B5370C584929688967A3878947A" : 0,
+    "FEFD3A155CF1B231AC02373441C76654645FC6D1" : 0,
+    "3F73BCBAF951324174BCEF6ED696DF8C500B5C1C" : 0,
+    "E63A8955942DF09BA26ADA25E04DCC4BB5963191" : 0,
+    "901A36E7B1E1441D2496C057FFF46439064D5250" : 0,
+    "F68CAB7CF070A331E355D5822E10233633A29D59" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3BB35584-1DB9-40D3-B63E-0BF602A7140D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9B076C6A47502B5370C584929688967A3878947A" : "vsr2.0\/ext\/gfx\/",
+    "FEFD3A155CF1B231AC02373441C76654645FC6D1" : "planar\/",
+    "3F73BCBAF951324174BCEF6ED696DF8C500B5C1C" : "variant\/",
+    "E63A8955942DF09BA26ADA25E04DCC4BB5963191" : "vsr2.0\/",
+    "901A36E7B1E1441D2496C057FFF46439064D5250" : "vsr2.0\/ext\/glv\/",
+    "F68CAB7CF070A331E355D5822E10233633A29D59" : "planar\/third-party\/range-v3\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Planar",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "xcode\/Planar.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eggs-cpp\/variant.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3F73BCBAF951324174BCEF6ED696DF8C500B5C1C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/AlloSphere-Research-Group\/GLV.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "901A36E7B1E1441D2496C057FFF46439064D5250"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/wolftype\/gfx.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9B076C6A47502B5370C584929688967A3878947A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/wolftype\/vsr2.0.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E63A8955942DF09BA26ADA25E04DCC4BB5963191"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ericniebler\/range-v3.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F68CAB7CF070A331E355D5822E10233633A29D59"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/weshoke\/planar.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FEFD3A155CF1B231AC02373441C76654645FC6D1"
+    }
+  ]
+}
